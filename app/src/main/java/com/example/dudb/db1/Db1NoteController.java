@@ -1,6 +1,7 @@
 package com.example.dudb.db1;
 
-import com.example.dudb.Note;
+import com.example.db1jar.Db1NoteService;
+import com.example.db1jar.Note;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

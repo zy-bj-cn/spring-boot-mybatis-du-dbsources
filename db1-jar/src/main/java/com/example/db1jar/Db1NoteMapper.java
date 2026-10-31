@@ -1,6 +1,5 @@
-package com.example.dudb.db1;
+package com.example.db1jar;
 
-import com.example.dudb.Note;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;

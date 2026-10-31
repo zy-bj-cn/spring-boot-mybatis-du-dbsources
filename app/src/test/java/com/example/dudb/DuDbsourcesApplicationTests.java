@@ -28,8 +28,11 @@ class DuDbsourcesApplicationTests {
     @Autowired
     private ConfigurableApplicationContext context;
 
+    @Autowired
+    private DataSource dataSourceInjectedByType;
+
     @Test
-    void neitherDataSourceBeanIsPrimary() {
+    void jarDataSourceIsTheOnlyTypeMatchAndNeitherIsPrimary() {
         String[] names = context.getBeanNamesForType(DataSource.class);
         assertThat(names).containsExactlyInAnyOrder("db1DataSource", "db2DataSource");
         for (String name : names) {
@@ -37,6 +40,12 @@ class DuDbsourcesApplicationTests {
                     .as(name)
                     .isFalse();
         }
+        assertThat(context.getBeanFactory().getMergedBeanDefinition("db2DataSource").isAutowireCandidate())
+                .isFalse();
+        assertThat(context.getBeanFactory().getMergedBeanDefinition("db2SqlSessionFactory").isAutowireCandidate())
+                .isFalse();
+        assertThat(dataSourceInjectedByType)
+                .isSameAs(context.getBean("db1DataSource", DataSource.class));
     }
 
     @Test

@@ -13,6 +13,7 @@ public class Db2NoteService {
         this.mapper = mapper;
     }
 
+    // 不写名字时会落到 jar 里那个唯一可按类型注入的事务管理器，所以数据源 2 必须点名。
     @Transactional(transactionManager = "db2TransactionManager")
     public Note create(String body) {
         Note note = new Note();

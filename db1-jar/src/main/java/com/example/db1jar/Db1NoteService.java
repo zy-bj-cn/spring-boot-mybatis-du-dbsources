@@ -1,10 +1,7 @@
-package com.example.dudb.db1;
+package com.example.db1jar;
 
-import com.example.dudb.Note;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
 public class Db1NoteService {
 
     private final Db1NoteMapper mapper;
@@ -13,7 +10,7 @@ public class Db1NoteService {
         this.mapper = mapper;
     }
 
-    @Transactional(transactionManager = "db1TransactionManager")
+    @Transactional
     public Note create(String body) {
         Note note = new Note();
         note.setBody(body);
@@ -21,7 +18,7 @@ public class Db1NoteService {
         return note;
     }
 
-    @Transactional(transactionManager = "db1TransactionManager", readOnly = true)
+    @Transactional(readOnly = true)
     public Note find(long id) {
         return mapper.findById(id);
     }
